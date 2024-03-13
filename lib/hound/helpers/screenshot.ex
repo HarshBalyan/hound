@@ -20,11 +20,12 @@ defmodule Hound.Helpers.Screenshot do
   """
   @spec take_screenshot(String.t) :: String.t
   def take_screenshot(path \\ default_path()) do
+    IO.inspect(path, label: :hound_take_screenshot_path)
     session_id = Hound.current_session_id
-    base64_png_data = make_req(:get, "session/#{session_id}/screenshot")
-    binary_image_data = :base64.decode(base64_png_data)
+    base64_png_data = make_req(:get, "session/#{session_id}/screenshot") |> IO.inspect(label: :hound_take_screenshot_make_req)
+    binary_image_data = :base64.decode(base64_png_data) |> IO.inspect(label: :hound_take_screenshot_base64_decode)
 
-    :ok = File.write path, binary_image_data
+    :ok = File.write(path, binary_image_data) |> IO.inspect(label: :hound_take_screenshot_file_write)
     path
   end
 

@@ -23,6 +23,7 @@ defmodule Hound.Browser do
     capabilities
     |> Map.merge(default_capabilities)
     |> Map.merge(additional_capabilities)
+    |> IO.inspect(label: "make_capabilities")
   end
 
   @doc "Returns a user agent string"

@@ -26,6 +26,7 @@ defmodule Hound.Helpers do
   defmacro hound_session(opts \\ []) do
     quote do
       setup do
+        IO.inspect(unquote(opts), label: "hound_session_opts")
         Hound.start_session(unquote(opts))
         parent = self()
         on_exit(fn -> Hound.end_session(parent) end)

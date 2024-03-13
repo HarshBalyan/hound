@@ -44,7 +44,7 @@ defmodule Hound.Helpers.Session do
     change_session_to(session_name)
     result = apply(func, [])
     change_session_to(previous_session_name)
-    result 
+    result
   end
 
 
@@ -94,6 +94,7 @@ defmodule Hound.Helpers.Session do
     * `:driver` - The additional capabilities to be passed directly to the webdriver.
   """
   def start_session(opts \\ []) do
+    IO.inspect(opts, label: "start_session_opts")
     Hound.SessionServer.session_for_pid(self(), opts)
   end
 
